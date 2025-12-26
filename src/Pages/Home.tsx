@@ -22,9 +22,23 @@ import {
   MapPin,
   Percent,
   UserCheck,
-  Building2, // Changed from Building
-  Instagram, // Added Instagram icon
+  Building2,
+  Instagram,
 } from "lucide-react";
+
+// Generate particles outside the component to avoid React purity issues
+const generateParticles = () => {
+  return Array.from({ length: 15 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    top: Math.random() * 100,
+    x: Math.random() * 100 - 50,
+    y: Math.random() * 100 - 50,
+    targetX: Math.random() * 200 - 100,
+    targetY: Math.random() * 200 - 100,
+    duration: Math.random() * 20 + 10,
+  }));
+};
 
 const Home: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -77,7 +91,7 @@ const Home: React.FC = () => {
     );
   };
 
-  // Animation variants - Fixed for Framer Motion v10+
+  // Animation variants
   const fadeInUp = {
     hidden: { y: 60, opacity: 0 },
     visible: {
@@ -112,19 +126,8 @@ const Home: React.FC = () => {
     },
   };
 
-  // Fixed floating particles positions - Moved to useMemo
-  const particles = useMemo(() => {
-    return Array.from({ length: 15 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-      x: Math.random() * 100 - 50,
-      y: Math.random() * 100 - 50,
-      targetX: Math.random() * 200 - 100,
-      targetY: Math.random() * 200 - 100,
-      duration: Math.random() * 20 + 10,
-    }));
-  }, []); // Empty dependency array ensures this only runs once
+  // Fixed floating particles positions - Now generated outside component
+  const particles = useMemo(() => generateParticles(), []);
 
   return (
     <div
@@ -397,7 +400,7 @@ const Home: React.FC = () => {
           style={{ opacity }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         >
-          <div className="flex flex-col items-center space-y-2">
+          <div className="flex flex-col items-center space-y=2">
             <span className="text-sm text-gray-500">Scroll to explore</span>
             <div className="w-6 h-10 border border-white/20 rounded-full flex justify-center p-1">
               <motion.div
@@ -598,7 +601,7 @@ const Home: React.FC = () => {
                   gradient: "from-yellow-500 to-amber-500",
                 },
                 {
-                  icon: Building2, // Changed from Building
+                  icon: Building2,
                   title: "Local Business Gigs",
                   desc: "Find part-time work, event staffing, and project-based opportunities from local businesses.",
                   gradient: "from-indigo-500 to-purple-500",
