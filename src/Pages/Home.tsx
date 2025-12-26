@@ -23,6 +23,7 @@ import {
   Percent,
   UserCheck,
   Building2, // Changed from Building
+  Instagram, // Added Instagram icon
 } from "lucide-react";
 
 const Home: React.FC = () => {
@@ -65,6 +66,15 @@ const Home: React.FC = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setIsMenuOpen(false);
+  };
+
+  // Open Instagram link
+  const openInstagram = () => {
+    window.open(
+      "https://www.instagram.com/quickquid.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D",
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   // Animation variants - Fixed for Framer Motion v10+
@@ -212,6 +222,18 @@ const Home: React.FC = () => {
                 )
               )}
 
+              {/* Instagram Icon - Desktop */}
+              <motion.button
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+                onClick={openInstagram}
+                className="p-2.5 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-pink-500/30"
+                title="Follow us on Instagram"
+              >
+                <Instagram className="w-5 h-5 text-white" />
+              </motion.button>
+
               {/* Waitlist Button */}
               <motion.button
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -260,6 +282,16 @@ const Home: React.FC = () => {
                     {item.replace(/-/g, " ")}
                   </button>
                 ))}
+
+                {/* Instagram Button - Mobile */}
+                <button
+                  onClick={openInstagram}
+                  className="w-full py-3 px-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-lg font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-300 flex items-center justify-center gap-3"
+                >
+                  <Instagram className="w-5 h-5" />
+                  Follow us on Instagram
+                </button>
+
                 <button
                   onClick={() => scrollToSection("waitlist")}
                   className="w-full mt-4 py-3.5 border-2 border-blue-600 text-blue-400 rounded-full font-semibold hover:bg-blue-600/10 transition-all duration-300"
@@ -810,6 +842,16 @@ const Home: React.FC = () => {
               >
                 Support
               </a>
+
+              {/* Instagram Icon in Footer */}
+              <button
+                onClick={openInstagram}
+                className="flex items-center gap-2 text-gray-400 hover:text-pink-400 transition-colors duration-300"
+                title="Follow us on Instagram"
+              >
+                <Instagram className="w-5 h-5" />
+                <span>Instagram</span>
+              </button>
             </div>
 
             {/* Copyright */}
