@@ -225,6 +225,8 @@ const Contact: React.FC<ContactProps> = ({ onInstagramClick }) => {
         templateParams
       );
 
+      console.log("✅ Email sent successfully:", response);
+
       // Success handling
       setContactStatus("success");
       setContactForm({ name: "", email: "", message: "" });

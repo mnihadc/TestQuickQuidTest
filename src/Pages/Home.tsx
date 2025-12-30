@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import Contact from "../Components/Contact"
+import Contact from "../Components/Contact";
 import {
   motion,
   AnimatePresence,
@@ -134,8 +134,7 @@ const PolicyPage: React.FC<PolicyPageProps> = ({
 const Home: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("hero");
   const [currentPage, setCurrentPage] = useState("home");
@@ -206,18 +205,6 @@ const Home: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Handle email submission
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email && email.includes("@")) {
-      setIsSubmitted(true);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setEmail("");
-      setTimeout(() => setIsSubmitted(false), 3000);
-    }
-  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -1441,11 +1428,7 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
       </section>
-      <Contact
-        onWaitlistSubmit={handleSubmit}
-        onInstagramClick={openInstagram}
-        isSubmitted={isSubmitted}
-      />
+      <Contact onInstagramClick={openInstagram} />
     </>
   );
 
